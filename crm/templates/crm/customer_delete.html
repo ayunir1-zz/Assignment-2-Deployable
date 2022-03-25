@@ -1,0 +1,17 @@
+{% extends 'crm/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>MFS Customer Delete</title>
+</head>
+    <h2>Delete {{ customer.cust_name }} from the store?</h2>
+    <form method="post">
+        <div class="col-md-4" style="margin-top:0px;">
+            {% csrf_token %}
+            <div style="margin-top:30px;">
+                <a class="btn btn-danger navbar-btn normal-btn-design" style="width:100px; color:white;margin-right:30px;" href="{% url 'crm:customer_list' %}">Cancel</a>
+                <input class="btn btn-success navbar-btn" style="width:100px; color:white;" type="submit" value="Yes, Delete">
+            </div>
+        </div>
+    </form>
+{% endblock %}

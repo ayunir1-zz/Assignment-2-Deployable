@@ -1,0 +1,45 @@
+{% extends 'crm/base.html' %}
+{% load humanize %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>MFS Service List</title>
+</head>
+    <h2>Service List</h2>
+    <!--reduced table contents to show only important info-->
+    <div>
+        <a class="btn btn-primary navbar-btn" style="color:white;" href="{% url 'crm:service_new' %}">Add Service</a>
+    </div>
+    <div style="margin-top:30px;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Service Category</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Setup Time</th>
+                    <th>Cleanup Time</th>
+                    <th>Service Charge</th>
+                    <th colspan="3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for service in services %}
+                <tr>
+                    <td>{{ service.cust_name }}</td>
+                    <td>{{ service.service_category }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>{{ service.location }}</td>
+                    <td>{{ service.setup_time }}</td>
+                    <td>{{ service.cleanup_time }}</td>
+                    <td>${{ service.service_charge|floatformat:2|intcomma }}</td>
+                    <td><a href="{% url 'crm:service_edit' pk=service.pk %}" class="btn btn-warning">Edit</a></td>
+                    <td><a href="{% url 'crm:service_delete' pk=service.pk %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,107 @@
+{% extends 'crm/base.html' %}
+{% block content %}
+{% load mathfilters %}
+{% load humanize %}
+{% load bootstrap4 %}
+
+<div>
+    <div class="row">
+      <h1>Summary for {{ customer.cust_name }}</h1>
+    </div>
+
+    <div style="margin-top:20px;" class="row">
+        <h4 style="color:slategrey;">Product Information</h4>
+    </div>
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Pickup Time</th>
+                <th>Total Charge</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.product }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.quantity|intcomma }}</td>
+                    <td>{{ product.pickup_time }}</td>
+                    <td><strong>$ {{ product.charge|intcomma }}</strong></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div clas="row">
+        <div class="col-md-4">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="bg-info">
+                        <th>Total Product Charges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$ <strong>{{ sum_product_charge.charge__sum|floatformat:2 }}</strong></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--for services-->
+    <div style="margin-top:20px;" class="row">
+        <h4 style="color:slategrey;">Services Information</h4>
+    </div>
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Date Started</th>
+                <th>Date Closed</th>
+                <th>Total Charge</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for service in services %}
+                <tr>
+                    <td>{{ service.service_category }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>{{ service.setup_time }}</td>
+                    <td>{{ service.cleanup_time }}</td>
+                    <td>$ <strong>{{ service.service_charge|intcomma }}</strong></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div clas="row">
+        <div class="col-md-4">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="bg-info">
+                        <th>Total Service Charges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>$ {{ sum_service_charge.service_charge__sum|floatformat:2 }}</strong></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

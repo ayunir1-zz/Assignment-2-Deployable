@@ -1,0 +1,32 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
+
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group form-group-lg" style="margin-top:20px;">
+        <!--<label for="inputuser" class="col-sm-2">Username: </label>-->
+        <div class="col-sm-4">
+            <input type="username" id="inputuser" name="username" class="form-control" placeholder="Username" required autofocus>
+        </div>
+        <p style="margin-top:30px;"></p>
+        <!--<label for="inputPassword" class="col-sm-2">Password:</label>-->
+        <div class="col-sm-4">
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="col-sm-12">
+            <input type="submit" value="login" class="btn btn-success navbar-btn" style="width:10%;margin-top:30px;"/>
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+    </div>
+  </form>
+
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <p style="margin:15px;"><a href="}">Lost password?</a></p>
+
+{% endblock %}

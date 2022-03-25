@@ -1,0 +1,4 @@
+Django==3.2.3
+django-crispy-forms
+django-bootstrap4==21.2
+django-mathfilters

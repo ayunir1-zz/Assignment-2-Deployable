@@ -1,0 +1,41 @@
+{% extends 'crm/base.html' %}
+{% load humanize %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>MFS Product List</title>
+</head>
+    <h2>Product List</h2>
+    <!--reduced table contents to show only important info-->
+    <div>
+        <a class="btn btn-primary navbar-btn" style="color:white;" href="{% url 'crm:product_new' %}">Add Product</a>
+    </div>
+    <div style="margin-top:30px;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Customer</th>
+                    <th>Quantity</th>
+                    <th>Charge</th>
+                    <th>Pick Up Time</th>
+                    <th colspan="3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.product }}</td>
+                    <td>{{ product.cust_name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>${{ product.charge|floatformat:2|intcomma }}</td>
+                    <td>{{ product.pickup_time }}</td>
+                    <td><a href="{% url 'crm:product_edit' pk=product.pk %}" class="btn btn-warning">Edit</a></td>
+                    <td><a href="{% url 'crm:product_delete' pk=product.pk %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

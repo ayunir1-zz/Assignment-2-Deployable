@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- add local stylesheet -->
+    <link rel="stylesheet" href="{% static "css/portfolio.css" %}">
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar-fixed-top">
+        <div class="nav" style="margin:10px;">
+            <ul class="nav navbar-nav">
+                <li class="mfs-name">Maverick Food Service</li>
+                <li><a href="" class="btn btn-info navbar-btn" style="margin-bottom:10px;" role="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar">Toggle Navigation</a></li>
+            </ul>
+        </div>
+        <!-- Dark background with white text -->
+        <div class="navbar navbar-expand-sm bg-secondary navbar-dark" id="myNavbar">
+            <!--Display navigation options left-justified in navbar -->
+            <ul class=" navbar-nav ">
+                <li class="navbar-brand"></li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'crm:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                            <a class="nav-link" href="{% url 'crm:customer_list' %}">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'crm:service_list' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'crm:product_list' %}">Products</a>
+                </li>
+            </ul>
+
+            <!--Display Login/Logout right-justified in navbar -->
+            <ul class="nav navbar-nav ml-auto" >
+                {% if user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+
+                {% else %}
+                    <li><a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in "></span>Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+        <!-- Where the page begins without the nav bar-->
+    <div id="app-layout" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="margin: 10px;">
+                    {% block content %}
+                        <!-- this is where your templates will go in-->
+                    {% endblock %}
+                </div>
+            </div>
+    </div>
+    <!--Spacers for nothing-->
+    <p></p>
+    <hr>
+    <footer class="navbar-default">
+              <div class="container-fluid">
+                  <div class="navbar-header"><strong>MFS CRM</strong> | <a href="https://opensource.org/licenses/MIT">&copy 2022</a></div>
+              </div>
+    </footer>
+    <p></p>
+    </div>
+
+</body>
+</html>
